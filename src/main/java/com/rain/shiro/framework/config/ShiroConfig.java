@@ -3,7 +3,6 @@ package com.rain.shiro.framework.config;
 import com.rain.shiro.commons.constant.Constants;
 import com.rain.shiro.commons.utils.StringUtils;
 import com.rain.shiro.commons.utils.security.CipherUtils;
-import com.rain.shiro.framework.redis.FastJson2JsonRedisSerializer;
 import com.rain.shiro.framework.shiro.LoginFilter;
 import com.rain.shiro.framework.shiro.MySessionManager;
 import com.rain.shiro.framework.shiro.UserRealm;

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rain.shiro.project.mapper.SysCategoryMapper">
+
+    <resultMap type="SysCategory" id="SysCategoryResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="info" column="info"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectSysCategoryVo">
+        select id, name, info, create_by, create_time, update_by, update_time, remark
+        from sys_category
+    </sql>
+
+    <select id="selectList" parameterType="SysCategory" resultMap="SysCategoryResult">
+        <include refid="selectSysCategoryVo"/>
+        <where>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="info != null  and info != ''">and info like concat('%', #{info}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="Long" resultMap="SysCategoryResult">
+        <include refid="selectSysCategoryVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectByName" parameterType="String" resultMap="SysCategoryResult">
+        <include refid="selectSysCategoryVo"/>
+        where name = #{name}
+    </select>
+
+    <insert id="insert" parameterType="SysCategory" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="info != null and info != ''">info,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="info != null and info != ''">#{info},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="SysCategory">
+        update sys_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="info != null and info != ''">info = #{info},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        delete from sys_category where id = #{id}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="String">
+        delete from sys_category where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

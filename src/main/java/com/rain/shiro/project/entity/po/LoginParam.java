@@ -18,12 +18,12 @@ public class LoginParam {
     @ApiModelProperty(value = "用户密码")
     private String password;
 
-    @NotBlank(message = "验证码不能为空")
-    @ApiModelProperty(value = "验证码（/captcha 接口获取）")
-    private String code;
-
-    @NotBlank(message = "唯一标识不能为空")
-    @ApiModelProperty(value = "唯一标识（/captcha 接口获取）")
-    private String uuid;
+//    @NotBlank(message = "验证码不能为空")
+//    @ApiModelProperty(value = "验证码（/captcha 接口获取）")
+//    private String code;
+//
+//    @NotBlank(message = "唯一标识不能为空")
+//    @ApiModelProperty(value = "唯一标识（/captcha 接口获取）")
+//    private String uuid;
 
 }

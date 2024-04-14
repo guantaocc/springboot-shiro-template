@@ -19,7 +19,7 @@ public class TableDataInfo<T> implements Serializable {
     private long total;
 
     @ApiModelProperty(value = "列表数据")
-    private List<T> data;
+    private Object data;
 
     @ApiModelProperty(value = "消息状态码")
     private int code;

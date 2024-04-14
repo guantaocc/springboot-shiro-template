@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * web层通用数据处理
@@ -69,7 +71,10 @@ public class BaseController {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(ResultEnum.SUCCESS.getCode());
         rspData.setMsg(ResultEnum.SUCCESS.getMsg());
-        rspData.setData(list);
+        Map<String, Object> res = new HashMap<>();
+        res.put("total", new PageInfo(list).getTotal());
+        res.put("rows", list);
+        rspData.setData(res);
         rspData.setTotal(new PageInfo(list).getTotal());
         return rspData;
     }
