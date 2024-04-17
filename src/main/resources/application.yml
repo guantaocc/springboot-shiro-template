@@ -19,6 +19,7 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: static/i18n/messages
+
 # MyBatis配置
 mybatis:
   # 搜索指定包别名
@@ -31,35 +32,7 @@ mybatis:
     use-generated-keys: true
     default-executor-type: simple
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-# 安全框架配置
-shiro:
-  # 用户配置
-  user:
-    password:
-      # 密码错误{maxRetryCount}次锁定10分钟
-      maxRetryCount: 100000
-  cookie:
-    # 设置Cookie的域名 默认空，即当前访问的域名
-    domain:
-    # 设置cookie的有效访问路径
-    path: /
-    # 设置HttpOnly属性
-    httpOnly: true
-    # 设置Cookie的过期时间（单位：天）
-    maxAge: 30
-    # 设置密钥，务必保持唯一性（生成方式，直接拷贝到main运行即可）Base64.encodeToString(CipherUtils.generateNewKey(128, "AES").getEncoded())
-    #（默认启动生成随机秘钥，随机秘钥会导致之前客户端RememberMe Cookie无效，如设置固定秘钥RememberMe Cookie则有效）
-    cipherKey:
-  session:
-    # Session超时时间，-1代表永不过期（单位：分钟）
-    expireTime: -1
-    # 同一个用户最大会话数，比如2的意思是同一个账号允许最多同时两个人登录（默认-1不限制）
-    maxSession: -1
-    # 踢出之前登录的/之后登录的用户，默认false踢出之前登录的用户
-    kickoutAfter: false
-  rememberMe:
-    # 是否开启记住我
-    enabled: true
+
 # 接口文档
 knife4j:
   enable: true
@@ -78,11 +51,3 @@ knife4j:
         group-name: all-api
         api-rule: package
         api-rule-resources: com.rain
-# 防止XSS攻击
-xss:
-  # 过滤开关
-  enabled: true
-  # 排除链接（多个用逗号分隔）
-  excludes:
-  # 匹配链接
-  urlPatterns: /user/*

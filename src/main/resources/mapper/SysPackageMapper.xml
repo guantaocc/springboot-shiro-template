@@ -38,6 +38,11 @@
         where id = #{id}
     </select>
 
+    <select id="selectSysPackageByCategoryId" parameterType="Long" resultMap="SysPackageResult">
+        <include refid="selectSysPackageVo"/>
+        where category_id = #{categoryId}
+    </select>
+
     <insert id="insertSysPackage" parameterType="SysPackage" useGeneratedKeys="true" keyProperty="id">
         insert into sys_package
         <trim prefix="(" suffix=")" suffixOverrides=",">

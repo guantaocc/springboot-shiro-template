@@ -3,7 +3,6 @@ package com.rain.shiro.project.service.impl;
 import java.util.List;
 
 import com.rain.shiro.commons.utils.DateUtils;
-import com.rain.shiro.commons.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rain.shiro.project.mapper.SysUserMapper;
@@ -48,7 +47,6 @@ public class SysUserServiceImpl implements SysUserService {
      */
     @Override
     public int insertSysUser(SysUser sysUser) {
-        sysUser.setCreateBy(ShiroUtils.getUserName());
         sysUser.setCreateTime(DateUtils.getNowDate());
         return sysUserMapper.insertSysUser(sysUser);
     }
@@ -62,7 +60,6 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public int updateSysUser(SysUser sysUser) {
         sysUser.setUpdateTime(DateUtils.getNowDate());
-        sysUser.setUpdateBy(ShiroUtils.getUserName());
         return sysUserMapper.updateSysUser(sysUser);
     }
 

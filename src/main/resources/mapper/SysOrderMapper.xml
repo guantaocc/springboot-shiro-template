@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rain.shiro.project.mapper.SysOrderMapper">
+
+    <resultMap type="SysOrder" id="SysOrderResult">
+        <result property="id"    column="id"    />
+        <result property="phone"    column="phone"    />
+        <result property="address"    column="address"    />
+        <result property="institutionPhone"    column="institution_phone"    />
+        <result property="packageId"    column="package_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="reportUrl"    column="report_url"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSysOrderVo">
+        select id, phone, address, institution_phone, package_id, user_id, order_status, report_url, create_time, create_by, update_time, update_by, remark from sys_order
+    </sql>
+
+    <select id="selectSysOrderList" parameterType="SysOrder" resultMap="SysOrderResult">
+        <include refid="selectSysOrderVo"/>
+        <where>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="institutionPhone != null  and institutionPhone != ''"> and institution_phone = #{institutionPhone}</if>
+            <if test="packageId != null  and packageId != ''"> and package_id = #{packageId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="reportUrl != null  and reportUrl != ''"> and report_url = #{reportUrl}</if>
+        </where>
+    </select>
+
+    <select id="selectSysOrderById" parameterType="Long" resultMap="SysOrderResult">
+        <include refid="selectSysOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSysOrder" parameterType="SysOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="institutionPhone != null">institution_phone,</if>
+            <if test="packageId != null">package_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="reportUrl != null">report_url,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="institutionPhone != null">#{institutionPhone},</if>
+            <if test="packageId != null">#{packageId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="reportUrl != null">#{reportUrl},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysOrder" parameterType="SysOrder">
+        update sys_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="institutionPhone != null">institution_phone = #{institutionPhone},</if>
+            <if test="packageId != null">package_id = #{packageId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="reportUrl != null">report_url = #{reportUrl},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysOrderById" parameterType="Long">
+        delete from sys_order where id = #{id}
+    </delete>
+
+    <delete id="deleteSysOrderByIds" parameterType="String">
+        delete from sys_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

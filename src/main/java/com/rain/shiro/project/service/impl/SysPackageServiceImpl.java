@@ -2,7 +2,6 @@ package com.rain.shiro.project.service.impl;
 
 import java.util.List;
 import com.rain.shiro.commons.utils.DateUtils;
-import com.rain.shiro.commons.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rain.shiro.project.mapper.SysPackageMapper;
@@ -34,6 +33,18 @@ public class SysPackageServiceImpl implements ISysPackageService
     }
 
     /**
+     * 查询套餐
+     *
+     * @param id 套餐主键
+     * @return 套餐
+     */
+
+    @Override
+    public List<SysPackage> selectSysPackageByCategoryId(Long categoryId){
+        return sysPackageMapper.selectSysPackageByCategoryId(categoryId);
+    }
+
+    /**
      * 查询套餐列表
      *
      * @param sysPackage 套餐
@@ -54,7 +65,6 @@ public class SysPackageServiceImpl implements ISysPackageService
     @Override
     public int insertSysPackage(SysPackage sysPackage)
     {
-        sysPackage.setCreateBy(ShiroUtils.getUserName());
         sysPackage.setCreateTime(DateUtils.getNowDate());
         return sysPackageMapper.insertSysPackage(sysPackage);
     }
@@ -69,7 +79,6 @@ public class SysPackageServiceImpl implements ISysPackageService
     public int updateSysPackage(SysPackage sysPackage)
     {
         sysPackage.setUpdateTime(DateUtils.getNowDate());
-        sysPackage.setUpdateBy(ShiroUtils.getUserName());
         return sysPackageMapper.updateSysPackage(sysPackage);
     }
 

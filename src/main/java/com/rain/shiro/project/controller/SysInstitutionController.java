@@ -3,9 +3,8 @@ package com.rain.shiro.project.controller;
 import java.util.List;
 
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.commons.utils.sign.Md5Utils;
-import com.rain.shiro.project.entity.SysUser;
-import com.rain.shiro.project.service.SysUserService;
+import com.rain.shiro.project.entity.SysInstitution;
+import com.rain.shiro.project.service.ISysInstitutionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,15 +20,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "用户接口")
+@Api(tags = "机构接口")
 @RestController
-@RequestMapping("/user")
-public class SysUserController extends BaseController {
+@RequestMapping("/institution")
+public class SysInstitutionController extends BaseController {
 
     @Autowired
-    private SysUserService sysUserService;
+    private ISysInstitutionService sysInstitutionService;
 
-    @ApiOperation(value = "查询用户列表")
+    @ApiOperation(value = "查询机构列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "页码", defaultValue = "1", dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "页数", defaultValue = "10", dataType = "int", paramType = "query"),
@@ -37,37 +36,34 @@ public class SysUserController extends BaseController {
             @ApiImplicitParam(name = "isAsc", value = "asc-升序, desc-降序", dataType = "string", paramType = "query")
     })
     @GetMapping("/list")
-    public TableDataInfo list(SysUser sysUser) {
+    public TableDataInfo list(SysInstitution sysInstitution) {
         startPage();
-        List<SysUser> list = sysUserService.selectSysUserList(sysUser);
+        List<SysInstitution> list = sysInstitutionService.selectSysInstitutionList(sysInstitution);
         return getDataTable(list);
     }
 
-    @ApiOperation(value = "获取单个用户")
-    @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "int", paramType = "query", required = true)
+    @ApiOperation(value = "获取单个机构")
+    @ApiImplicitParam(name = "id", value = "分类ID", dataType = "int", paramType = "query", required = true)
     @GetMapping(value = "/getInfo")
-    public Result getInfo(Long userId) {
-        return success(sysUserService.selectSysUserByUserId(userId));
+    public Result getInfo(Long id) {
+        return success(sysInstitutionService.selectSysInstitutionById(id));
     }
 
-    @ApiOperation(value = "新增用户")
+    @ApiOperation(value = "新增机构")
     @PostMapping("/insert")
-    public Result insert(@Validated @RequestBody SysUser sysUser) {
-        if (!sysUserService.checkUserNameUnique(sysUser)) {
-            return error("新增用户'" + sysUser.getUserName() + "'失败，用户账号已存在");
-        }
-        return isSuccess(sysUserService.insertSysUser(sysUser));
+    public Result insert(@Validated @RequestBody SysInstitution sysInstitution) {
+        return isSuccess(sysInstitutionService.insertSysInstitution(sysInstitution));
     }
 
-    @ApiOperation(value = "修改用户")
+    @ApiOperation(value = "修改机构")
     @PostMapping("/update")
-    public Result update(@Validated @RequestBody SysUser sysUser) {
-        return isSuccess(sysUserService.updateSysUser(sysUser));
+    public Result update(@Validated @RequestBody SysInstitution sysInstitution) {
+        return isSuccess(sysInstitutionService.updateSysInstitution(sysInstitution));
     }
 
-    @ApiOperation(value = "批量删除用户")
+    @ApiOperation(value = "批量删除机构")
     @PostMapping("/batchDelete")
-    public Result batchDelete(@PathVariable Long[] userIds) {
-        return isSuccess(sysUserService.deleteSysUserByUserIds(userIds));
+    public Result batchDelete(@PathVariable Long[] ids) {
+        return isSuccess(sysInstitutionService.deleteSysInstitutionByIds(ids));
     }
 }

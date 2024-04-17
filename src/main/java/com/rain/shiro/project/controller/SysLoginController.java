@@ -2,16 +2,13 @@ package com.rain.shiro.project.controller;
 
 import com.rain.shiro.commons.core.base.BaseController;
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.commons.utils.sign.RsaUtils;
-import com.rain.shiro.framework.redis.RedisCache;
+import com.rain.shiro.project.entity.SysUser;
 import com.rain.shiro.project.entity.po.LoginParam;
 import com.rain.shiro.project.service.impl.SysLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -29,40 +26,19 @@ import java.util.Map;
 @RestController
 public class SysLoginController extends BaseController {
 
-//    @Resource(name = "captchaProducer")
-//    private Producer captchaProducer;
-//
-//    @Resource(name = "captchaProducerMath")
-//    private Producer captchaProducerMath;
-
-    @Autowired
-    private RedisCache redisCache;
 
     @Autowired
     private SysLoginService sysLoginService;
 
-    @ApiOperation(value = "用户登录", notes = "{\n" +
-            "  \"code\": \"ad4p\",\n" +
-            "  \"password\": \"th67QMCowWgdIwRZvN2b5/GmNhZ/ODWNKP+kbhfQ6/NUHOnPkTM6w13d65ykBXMMMkyhLwmW/4Mr8BLdO4gZOA==\",\n" +
-            "  \"username\": \"admin\",\n" +
-            "  \"uuid\": \"8c5b4f8f69a54f4b96096ada3088945f\"\n" +
-            "}")
+    @ApiOperation(value = "用户登录", notes = "")
     @PostMapping("/login")
     public Result login(@Validated @RequestBody LoginParam loginParam) {
-        // 验证码校验
-//        sysLoginService.captchaValidate(loginParam.getCode(), loginParam.getUuid());
         // 用户信息验证
-        Subject subject = SecurityUtils.getSubject();
-        String username = loginParam.getUsername();
-        String password = RsaUtils.decryptByPrivateKey(loginParam.getPassword());
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password, true);
-        try {
-            subject.login(token);
-        } catch (AuthenticationException e) {
-            log.error("用户[" + username + "]未通过登录验证.", e);
-            return error(e.getMessage());
+        SysUser sysUser = sysLoginService.login(loginParam.getUsername(), loginParam.getPassword());
+        if(sysUser.getUserName().equals(loginParam.getUsername()) && sysUser.getPassword().equals(loginParam.getPassword())){
+            return Result.success("登录成功", sysUser);
         }
-        return success(subject.getSession().getId());
+        return Result.error("用户名和密码不正确");
     }
 
     @ApiOperation(value = "用户信息", notes = "用户信息")
@@ -83,27 +59,4 @@ public class SysLoginController extends BaseController {
         subject.logout();
         return success();
     }
-
-//    @ApiOperation(value = "验证码")
-//    @GetMapping(value = "/captcha")
-//    public MapResult getCode() {
-//        MapResult result = MapResult.success();
-//        // 保存验证码信息
-//        String uuid = IdUtils.simpleUUID();
-//        String verifyKey = ShiroConstants.SYS_CAPTCHA + uuid;
-//        // 生成验证码
-//        String code = captchaProducer.createText();
-//        log.info("captcha：" + code);
-//        BufferedImage image = captchaProducer.createImage(code);
-//        redisCache.setCacheObject(verifyKey, code, ShiroConstants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
-//        // 转换流信息写出
-//        try (FastByteArrayOutputStream os = new FastByteArrayOutputStream()) {
-//            ImageIO.write(image, "jpg", os);
-//            return result.put("uuid", uuid).put("img", Base64.encode(os.toByteArray()));
-//        } catch (IOException e) {
-//            log.error("生成验证码异常", e);
-//            return MapResult.error(e.getMessage());
-//        }
-//    }
-
 }

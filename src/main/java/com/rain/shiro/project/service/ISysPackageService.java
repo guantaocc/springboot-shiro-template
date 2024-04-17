@@ -19,6 +19,9 @@ public interface ISysPackageService
      */
     public SysPackage selectSysPackageById(Long id);
 
+    public List<SysPackage> selectSysPackageByCategoryId(Long categoryId);
+
+
     /**
      * 查询套餐列表
      *

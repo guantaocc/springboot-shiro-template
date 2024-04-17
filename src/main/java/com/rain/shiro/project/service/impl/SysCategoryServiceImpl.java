@@ -3,7 +3,6 @@ package com.rain.shiro.project.service.impl;
 import java.util.List;
 
 import com.rain.shiro.commons.utils.DateUtils;
-import com.rain.shiro.commons.utils.ShiroUtils;
 import com.rain.shiro.project.entity.SysCategory;
 import com.rain.shiro.project.service.SysCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,6 @@ public class SysCategoryServiceImpl implements SysCategoryService {
 
     @Override
     public int insert(SysCategory SysCategory) {
-        SysCategory.setCreateBy(ShiroUtils.getUserName());
         SysCategory.setCreateTime(DateUtils.getNowDate());
         return SysCategoryMapper.insert(SysCategory);
     }
@@ -41,7 +39,6 @@ public class SysCategoryServiceImpl implements SysCategoryService {
     @Override
     public int update(SysCategory SysCategory) {
         SysCategory.setUpdateTime(DateUtils.getNowDate());
-        SysCategory.setUpdateBy(ShiroUtils.getUserName());
         return SysCategoryMapper.update(SysCategory);
     }
 

@@ -20,6 +20,14 @@ public interface SysPackageMapper
     public SysPackage selectSysPackageById(Long id);
 
     /**
+     * 查询套餐
+     *
+     * @param categoryId 根据分类查询套餐列表
+     * @return 套餐
+     */
+    public List<SysPackage> selectSysPackageByCategoryId(Long categoryId);
+
+    /**
      * 查询套餐列表
      *
      * @param sysPackage 套餐

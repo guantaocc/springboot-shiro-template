@@ -3,8 +3,7 @@ package com.rain.shiro.project.controller;
 import java.util.List;
 
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.commons.utils.sign.Md5Utils;
-import com.rain.shiro.commons.utils.ShiroUtils;
+import com.rain.shiro.project.entity.SysCategory;
 import com.rain.shiro.project.entity.SysPackage;
 import com.rain.shiro.project.service.ISysPackageService;
 import io.swagger.annotations.Api;
@@ -39,13 +38,26 @@ public class SysPackageController extends BaseController {
         return getDataTable(list);
     }
 
-
+    @GetMapping("/all")
+    public Result all(SysPackage sysPackage) {
+        List<SysPackage> list = sysPackageService.selectSysPackageList(sysPackage);
+        return success(list);
+    }
 
     @ApiOperation(value = "获取单个套餐")
     @ApiImplicitParam(name = "id", value = "分类ID", dataType = "int", paramType = "query", required = true)
     @GetMapping(value = "/getInfo")
     public Result getInfo(Long id) {
         return success(sysPackageService.selectSysPackageById(id));
+    }
+
+
+    @ApiOperation(value = "根据分类查套餐")
+    @ApiImplicitParam(name = "categoryId", value = "分类ID", dataType = "int", paramType = "query", required = true)
+    @GetMapping(value = "/getPackageByCategory")
+    public Result getPackageByCategory(Long categoryId) {
+        System.out.println(categoryId);
+        return success(sysPackageService.selectSysPackageByCategoryId(categoryId));
     }
 
     @ApiOperation(value = "新增套餐")
