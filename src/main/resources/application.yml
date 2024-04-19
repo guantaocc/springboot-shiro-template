@@ -1,3 +1,6 @@
+web:
+  upload-path: E:/fuye-master/springboot-shiro-template/file/
+
 # 项目配置
 spring:
   # 选择配置文件
@@ -19,6 +22,9 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: static/i18n/messages
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
 
 # MyBatis配置
 mybatis:

@@ -21,9 +21,9 @@ public class FileController {
         String originFileName = file.getOriginalFilename();
         String fileName = UUID.randomUUID() + "_" + originFileName;
         String projectPath = System.getProperty("user.dir");
-        String realPath = projectPath + "\\" + "src\\main\\resources\\static" + "\\" + "images" + "\\" + fileName;
+        String realPath = projectPath + "\\"  + "file" + "\\" + fileName;
         File saveFile = new File(realPath);
         file.transferTo(saveFile);
-        return Result.success("成功", "/images/" + fileName);
+        return Result.success("成功", "/" + fileName);
     }
 }
