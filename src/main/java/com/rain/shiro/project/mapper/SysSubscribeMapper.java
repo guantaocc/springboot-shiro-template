@@ -1,7 +1,9 @@
 package com.rain.shiro.project.mapper;
 
 import com.rain.shiro.project.entity.SysSubscribe;
+import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -59,4 +61,8 @@ public interface SysSubscribeMapper
      * @return 结果
      */
     public int deleteSysSubscribeByIds(Long[] ids);
+
+    int countTodayNew(@Param("startOfDay") LocalDateTime startOfDay, @Param("endOfDay") LocalDateTime endOfDay);
+
+    int countAll();
 }

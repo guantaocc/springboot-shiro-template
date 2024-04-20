@@ -6,12 +6,11 @@
 
     <resultMap type="SysOrder" id="SysOrderResult">
         <result property="id"    column="id"    />
-        <result property="phone"    column="phone"    />
-        <result property="address"    column="address"    />
-        <result property="institutionPhone"    column="institution_phone"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="institutionId"    column="institution_id"    />
+        <result property="subscribeId"    column="subscribe_id"    />
         <result property="packageId"    column="package_id"    />
         <result property="userId"    column="user_id"    />
-        <result property="orderStatus"    column="order_status"    />
         <result property="reportUrl"    column="report_url"    />
         <result property="createTime"    column="create_time"    />
         <result property="createBy"    column="create_by"    />
@@ -21,18 +20,29 @@
     </resultMap>
 
     <sql id="selectSysOrderVo">
-        select id, phone, address, institution_phone, package_id, user_id, order_status, report_url, create_time, create_by, update_time, update_by, remark from sys_order
+        select id, order_id, institution_id, subscribe_id, package_id, user_id, report_url, create_time, create_by, update_time, update_by, remark from sys_order
     </sql>
+
+    <!--    查询今日 -->
+    <select id="countTodayNew" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_order
+        WHERE create_time BETWEEN #{startOfDay} AND #{endOfDay}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_order
+    </select>
 
     <select id="selectSysOrderList" parameterType="SysOrder" resultMap="SysOrderResult">
         <include refid="selectSysOrderVo"/>
         <where>
-            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
-            <if test="address != null  and address != ''"> and address = #{address}</if>
-            <if test="institutionPhone != null  and institutionPhone != ''"> and institution_phone = #{institutionPhone}</if>
-            <if test="packageId != null  and packageId != ''"> and package_id = #{packageId}</if>
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="institutionId != null "> and institution_id = #{institutionId}</if>
+            <if test="subscribeId != null "> and subscribe_id = #{subscribeId}</if>
+            <if test="packageId != null "> and package_id = #{packageId}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
-            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
             <if test="reportUrl != null  and reportUrl != ''"> and report_url = #{reportUrl}</if>
         </where>
     </select>
@@ -45,12 +55,11 @@
     <insert id="insertSysOrder" parameterType="SysOrder" useGeneratedKeys="true" keyProperty="id">
         insert into sys_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="phone != null and phone != ''">phone,</if>
-            <if test="address != null and address != ''">address,</if>
-            <if test="institutionPhone != null">institution_phone,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="institutionId != null">institution_id,</if>
+            <if test="subscribeId != null">subscribe_id,</if>
             <if test="packageId != null">package_id,</if>
             <if test="userId != null">user_id,</if>
-            <if test="orderStatus != null">order_status,</if>
             <if test="reportUrl != null">report_url,</if>
             <if test="createTime != null">create_time,</if>
             <if test="createBy != null">create_by,</if>
@@ -59,12 +68,11 @@
             <if test="remark != null">remark,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="phone != null and phone != ''">#{phone},</if>
-            <if test="address != null and address != ''">#{address},</if>
-            <if test="institutionPhone != null">#{institutionPhone},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="institutionId != null">#{institutionId},</if>
+            <if test="subscribeId != null">#{subscribeId},</if>
             <if test="packageId != null">#{packageId},</if>
             <if test="userId != null">#{userId},</if>
-            <if test="orderStatus != null">#{orderStatus},</if>
             <if test="reportUrl != null">#{reportUrl},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -77,12 +85,11 @@
     <update id="updateSysOrder" parameterType="SysOrder">
         update sys_order
         <trim prefix="SET" suffixOverrides=",">
-            <if test="phone != null and phone != ''">phone = #{phone},</if>
-            <if test="address != null and address != ''">address = #{address},</if>
-            <if test="institutionPhone != null">institution_phone = #{institutionPhone},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="institutionId != null">institution_id = #{institutionId},</if>
+            <if test="subscribeId != null">subscribe_id = #{subscribeId},</if>
             <if test="packageId != null">package_id = #{packageId},</if>
             <if test="userId != null">user_id = #{userId},</if>
-            <if test="orderStatus != null">order_status = #{orderStatus},</if>
             <if test="reportUrl != null">report_url = #{reportUrl},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createBy != null">create_by = #{createBy},</if>

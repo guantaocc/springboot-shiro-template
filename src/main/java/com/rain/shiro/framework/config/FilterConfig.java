@@ -1,17 +1,9 @@
 package com.rain.shiro.framework.config;
 
-import com.rain.shiro.commons.utils.StringUtils;
-import com.rain.shiro.commons.web.filter.XssFilter;
-import com.rain.shiro.commons.web.filter.RepeatableFilter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import com.rain.shiro.framework.druid.filter.RepeatableFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.servlet.DispatcherType;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Filter配置

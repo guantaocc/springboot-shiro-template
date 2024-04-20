@@ -41,6 +41,18 @@
         </where>
     </select>
 
+    <!--    查询今日 -->
+    <select id="countTodayNew" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_subscribe
+        WHERE create_time BETWEEN #{startOfDay} AND #{endOfDay}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_subscribe
+    </select>
+
     <select id="selectSysSubscribeById" parameterType="Long" resultMap="SysSubscribeResult">
         <include refid="selectSysSubscribeVo"/>
         where id = #{id}

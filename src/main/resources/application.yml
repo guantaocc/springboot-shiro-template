@@ -1,5 +1,7 @@
 web:
-  upload-path: E:/fuye-master/springboot-shiro-template/file/
+  upload-path: D:/springboot-shiro-template/file/
+
+
 
 # 项目配置
 spring:
@@ -7,6 +9,14 @@ spring:
   profiles:
     # dev 开发环境 | test 测试环境 | prod 线上环境
     active: dev
+
+  mvc:
+    cors:
+      mapping: /**
+      allowed-origins: "*"
+      allowed-methods: "GET,POST,PUT,DELETE"
+      allowed-headers: "*"
+
   # 应用名称
   application:
     name: project-shiro-redis-base-demo

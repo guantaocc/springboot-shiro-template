@@ -1,14 +1,16 @@
 package com.rain.shiro.project.mapper;
 
 import com.rain.shiro.project.entity.SysOrder;
+import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * 订单Mapper接口
  *
  * @author ruoyi
- * @date 2024-04-17
+ * @date 2024-04-20
  */
 public interface SysOrderMapper
 {
@@ -59,4 +61,14 @@ public interface SysOrderMapper
      * @return 结果
      */
     public int deleteSysOrderByIds(Long[] ids);
+
+    /**
+     * 查询今日新增
+     * @param startOfDay
+     * @param endOfDay
+     * @return
+     */
+    int countTodayNew(@Param("startOfDay") LocalDateTime startOfDay, @Param("endOfDay") LocalDateTime endOfDay);
+
+    int countAll();
 }

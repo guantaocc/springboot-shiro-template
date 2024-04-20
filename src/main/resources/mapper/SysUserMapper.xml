@@ -27,6 +27,7 @@
         <include refid="selectSysUserVo"/>
         <where>
             <if test="nickName != null  and nickName != ''">and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="userName != null  and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
         </where>
     </select>
 

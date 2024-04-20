@@ -1,5 +1,7 @@
 package com.rain.shiro.project.service.impl;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import com.rain.shiro.commons.utils.DateUtils;
 import com.rain.shiro.project.entity.SysSubscribe;
@@ -93,5 +95,15 @@ public class SysSubscribeServiceImpl implements ISysSubscribeService
     public int deleteSysSubscribeById(Long id)
     {
         return sysSubscribeMapper.deleteSysSubscribeById(id);
+    }
+
+    public int getTodayNewCount() {
+        LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
+        LocalDateTime endOfDay = LocalDateTime.now();
+        return sysSubscribeMapper.countTodayNew(startOfDay, endOfDay);
+    }
+
+    public int countAll(){
+        return sysSubscribeMapper.countAll();
     }
 }

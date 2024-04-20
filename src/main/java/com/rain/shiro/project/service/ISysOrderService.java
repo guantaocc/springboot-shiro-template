@@ -8,7 +8,7 @@ import java.util.List;
  * 订单Service接口
  *
  * @author ruoyi
- * @date 2024-04-17
+ * @date 2024-04-20
  */
 public interface ISysOrderService
 {
@@ -59,4 +59,8 @@ public interface ISysOrderService
      * @return 结果
      */
     public int deleteSysOrderById(Long id);
+
+    public int getTodayNewCount();
+
+    public int countAll();
 }

@@ -59,4 +59,8 @@ public interface ISysSubscribeService
      * @return 结果
      */
     public int deleteSysSubscribeById(Long id);
+
+    public int getTodayNewCount();
+
+    public int countAll();
 }

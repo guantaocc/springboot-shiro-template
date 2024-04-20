@@ -1,4 +1,4 @@
-package com.rain.shiro.commons.web.filter;
+package com.rain.shiro.framework.druid.filter;
 
 import com.rain.shiro.commons.utils.StringUtils;
 import org.springframework.http.MediaType;

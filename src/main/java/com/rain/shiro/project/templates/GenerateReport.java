@@ -3,65 +3,81 @@ package com.rain.shiro.project.templates;
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class GenerateReport {
     /**
      * 根据数据生成 word文档
      * @param data
      */
-    public String generateSubscribeReport(Object data) throws Exception{
+    public String generateSubscribeReport(Map data, String relationPath) throws Exception{
+        System.out.println(data.toString());
+
         Map<String, Object> datas = new HashMap<String, Object>();
 
+        System.out.println(data.get("insititutionInfo"));
+
+        List<HashMap<String, String>> listData = (List<HashMap<String, String>>) data.get("checkedList");
+
         // create table
-        RowRenderData header = Rows.of("Word处理方案", "是否跨平台", "易用性")
+        RowRenderData header = Rows.of("体检项", "体检结果")
                 .textColor("FFFFFF")
                 .bgColor("ff9800")
                 .center()
                 .rowHeight(2.5f)
                 .create();
-        RowRenderData row0 = Rows.create("Poi-tl", "纯Java组件，跨平台", "简单：模板引擎功能，并对POI进行了一些封装");
-        RowRenderData row1 = Rows.create("Apache Poi", "纯Java组件，跨平台", "简单，缺少一些功能的封装");
-        RowRenderData row2 = Rows.create("Freemarker", "XML操作，跨平台", "复杂，需要理解XML结构");
-        RowRenderData row3 = Rows.create("OpenOffice", "需要安装OpenOffice软件", "复杂，需要了解OpenOffice的API");
-        TableRenderData table = Tables.create(header, row0, row1, row2, row3);
+
+
+        List<RowRenderData> rowDataList = new ArrayList<>();
+
+        rowDataList.add(header);
+
+        for (HashMap<String, String> obj : listData){
+            String name = obj.get("title");
+            String isNormal = obj.get("isNormal");
+            RowRenderData row = Rows.create(name, isNormal);
+            rowDataList.add(row);
+        }
+
+        TableRenderData table = Tables.create(rowDataList.toArray(new RowRenderData[0]));
+
+        HashMap package1 = (HashMap) data.get("packageInfo");
+        String packageName = (String) package1.get("name");
+        String price = (String) package1.get("price");
+
+        HashMap institution = (HashMap) data.get("insititutionInfo");
+        String institutionName = (String) institution.get("name");
+        String address = (String) institution.get("address");
+        // 获取当前时间
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        // 创建日期时间格式化器，定义想要的日期时间格式
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // 格式化当前时间
+        String formattedTime = currentTime.format(formatter);
 
         // text
-        datas.put("header", "Deeply love what you love.");
-        datas.put("name", "Poi-tl");
-        datas.put("word", "模板引擎");
-        datas.put("time", "2020-08-31");
-        datas.put("what", "Java Word模板引擎： Minimal Microsoft word(docx) templating with {{template}} in Java.");
-        datas.put("author", Texts.of("Sayi卅一").color("000000").create());
-
-        // hyperlink
-        datas.put("introduce", Texts.of("http://www.deepoove.com").link("http://www.deepoove.com").create());
-        // picture
-        datas.put("portrait", Pictures.ofLocal("src/test/resources/sayi.png").size(60, 60).create());
+        datas.put("name", "机构");
+        datas.put("institution", Texts.of(institutionName).color("000000").create());
+        datas.put("package", Texts.of(packageName).color("ff9800").create());
+        datas.put("price", Texts.of(price).color("ff9800").create());
+        datas.put("create_time", Texts.of(formattedTime).color("000000").create());
+        datas.put("address", Texts.of(address).color("000000").create());
         // table
         datas.put("solution_compare", table);
-        // numbering
-        datas.put("feature",
-                Numberings.create("Plug-in grammar, add new grammar by yourself",
-                        "Supports word text, local pictures, web pictures, table, list, header, footer...",
-                        "Templates, not just templates, but also style templates"));
-
-        // chart
-        datas.put("chart",
-                Charts.ofMultiSeries("易用性", new String[] { "代码量", "维护量" })
-                        .addSeries("poi-tl", new Double[] { 10.0, 5.0 })
-                        .addSeries("freemark", new Double[] { 90.0, 70.0 })
-                        .create());
 
         String projectPath = System.getProperty("user.dir");
         String templatePath = projectPath + "\\"  + "src\\main\\resources\\template\\template.docx";
-        String targetPath = projectPath + "\\"  + "file\\" + UUID.randomUUID() + "_" + "template.docx";
+        String uuid = String.valueOf(UUID.randomUUID());
+        String returnPath = "/" + uuid + "_" + "template.docx";
+        String targetPath = projectPath + "\\"  + "file\\" + uuid + "_" + "template.docx";
 
         XWPFTemplate.compile(templatePath)
                 .render(datas)
                 .writeToFile(targetPath);
-        return targetPath;
+        return returnPath;
     }
 }
