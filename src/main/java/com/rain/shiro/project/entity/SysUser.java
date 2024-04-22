@@ -31,7 +31,7 @@ public class SysUser extends BaseEntity {
     @ApiModelProperty(value = "密码")
     private String password;
 
-    @ApiModelProperty(value = "盐加密")
+    @ApiModelProperty(value = "随机数")
     private String salt;
 
     @ApiModelProperty(value = "帐号状态（0正常 1停用）")

@@ -1,16 +1,12 @@
 package com.rain.shiro.project.controller;
 
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.project.entity.SysCategory;
 import com.rain.shiro.project.entity.SysSubscribe;
 import com.rain.shiro.project.service.ISysPackageService;
 import com.rain.shiro.project.service.ISysSubscribeService;
-import com.rain.shiro.project.templates.GenerateReport;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

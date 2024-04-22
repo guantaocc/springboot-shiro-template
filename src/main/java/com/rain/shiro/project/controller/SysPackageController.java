@@ -3,7 +3,6 @@ package com.rain.shiro.project.controller;
 import java.util.List;
 
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.project.entity.SysCategory;
 import com.rain.shiro.project.entity.SysPackage;
 import com.rain.shiro.project.service.ISysPackageService;
 import io.swagger.annotations.Api;

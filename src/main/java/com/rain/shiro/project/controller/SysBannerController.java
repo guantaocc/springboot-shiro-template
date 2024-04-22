@@ -3,9 +3,7 @@ package com.rain.shiro.project.controller;
 import java.util.List;
 
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.commons.utils.sign.Md5Utils;
 import com.rain.shiro.project.entity.SysBanner;
-import com.rain.shiro.project.entity.SysCategory;
 import com.rain.shiro.project.service.ISysBannerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

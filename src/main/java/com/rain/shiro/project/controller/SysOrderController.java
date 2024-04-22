@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.commons.utils.sign.Md5Utils;
 import com.rain.shiro.project.entity.*;
 import com.rain.shiro.project.service.*;
 import com.rain.shiro.project.templates.GenerateReport;
@@ -14,9 +13,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import com.rain.shiro.commons.core.base.BaseController;
 import com.rain.shiro.commons.utils.page.TableDataInfo;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,7 +1,6 @@
 package com.rain.shiro.framework.config;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,9 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.sql.DataSource;
 
 import com.rain.shiro.commons.utils.spring.SpringUtils;
-import com.rain.shiro.commons.enums.DataSourceType;
 import com.rain.shiro.framework.config.proerties.DruidProperties;
-import com.rain.shiro.framework.druid.DynamicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -21,7 +18,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
@@ -56,14 +52,6 @@ public class DruidConfig {
         return druidProperties.dataSource(dataSource);
     }
 
-    @Bean(name = "dynamicDataSource")
-    @Primary
-    public DynamicDataSource dataSource(DataSource masterDataSource) {
-        Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
-         setDataSource(targetDataSources, DataSourceType.SLAVE.name(), "slaveDataSource");
-        return new DynamicDataSource(masterDataSource, targetDataSources);
-    }
 
     /**
      * 设置数据源

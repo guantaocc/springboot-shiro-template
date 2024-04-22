@@ -3,7 +3,6 @@ package com.rain.shiro.project.controller;
 import java.util.List;
 
 import com.rain.shiro.commons.core.result.Result;
-import com.rain.shiro.commons.utils.sign.Md5Utils;
 import com.rain.shiro.project.entity.SysUser;
 import com.rain.shiro.project.service.SysUserService;
 import io.swagger.annotations.Api;

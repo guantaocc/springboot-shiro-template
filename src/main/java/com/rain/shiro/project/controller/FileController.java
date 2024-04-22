@@ -2,7 +2,6 @@ package com.rain.shiro.project.controller;
 
 import com.rain.shiro.commons.core.result.Result;
 import com.rain.shiro.commons.utils.uuid.UUID;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
