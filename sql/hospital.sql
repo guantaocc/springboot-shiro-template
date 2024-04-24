@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 120.48.30.252_12345
+Source Server         : 测试
 Source Server Version : 50735
 Source Host           : 120.48.30.252:12345
 Source Database       : hospital
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50735
 File Encoding         : 65001
 
-Date: 2024-04-20 22:04:45
+Date: 2024-04-24 18:29:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,13 +51,15 @@ CREATE TABLE `sys_category` (
   `update_by` varchar(100) DEFAULT NULL COMMENT '修改者',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='分类表';
 
 -- ----------------------------
 -- Records of sys_category
 -- ----------------------------
-INSERT INTO `sys_category` VALUES ('28', '入职体检', '针对职场相关人员入职', '2024-04-17 11:52:19', 'admin', null, null, null);
-INSERT INTO `sys_category` VALUES ('29', '常规体检B套餐', '日常常规体检', '2024-04-17 14:06:43', 'admin', null, null, null);
+INSERT INTO `sys_category` VALUES ('31', '入职体检', '职工入职体检', '2024-04-24 17:28:11', null, null, null, null);
+INSERT INTO `sys_category` VALUES ('32', '专项体检', '专项体检', '2024-04-24 17:29:25', null, null, null, null);
+INSERT INTO `sys_category` VALUES ('33', '父母体检', '体检', '2024-04-24 17:29:39', null, null, null, null);
+INSERT INTO `sys_category` VALUES ('34', '婚孕体检', '婚孕', '2024-04-24 17:29:52', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_institution
@@ -81,7 +83,7 @@ CREATE TABLE `sys_institution` (
 -- ----------------------------
 -- Records of sys_institution
 -- ----------------------------
-INSERT INTO `sys_institution` VALUES ('1', '好未来机构', '好未来xxx号', '13111111111', '/2bd4ca8f-5b71-4dfa-985a-64009a513e54_体检B.png', '0', null, null, '2024-04-19 15:04:53', null, '蜂箱内容');
+INSERT INTO `sys_institution` VALUES ('1', '好未来机构', '江苏省未来街道好未来xxx号100', '13311231311', '/fd65b119-0b86-423f-bd8e-5cfffd6f44d9_3x.png', '0', null, null, '2024-04-24 18:25:55', null, '每间医疗中心耗资数千万，配置国际主流品牌的医疗设备。凭借集团多年累积的企业健康管理经验和管理团队，自研健康管理信息化平台，引进行业专业人才，提供深度体检、早癌筛查、慢病管理、一站式全科门诊（全科、口腔科、医疗美容科、康复医学科、成人预防接种门诊……）、绿色就医通道等一站式全方位健康管理解决方案。');
 
 -- ----------------------------
 -- Table structure for sys_order
@@ -101,12 +103,13 @@ CREATE TABLE `sys_order` (
   `update_by` varchar(100) DEFAULT NULL COMMENT '修改者',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
 
 -- ----------------------------
 -- Records of sys_order
 -- ----------------------------
-INSERT INTO `sys_order` VALUES ('1', 'bfb1b315-c85b-4b70-abe4-7db1ebd05def', '1', '3', '31', '27', '/613ff841-d3d1-4f51-8d51-d31fc3478949_template.docx', '2024-04-20 16:28:21', null, '2024-04-20 20:00:06', null, null);
+INSERT INTO `sys_order` VALUES ('2', '9061fbe5-727e-4885-9dbf-0ca2e996ff91', '1', '5', '34', '27', null, '2024-04-24 17:52:51', null, null, null, null);
+INSERT INTO `sys_order` VALUES ('3', 'a572bc5e-99e3-446a-baa3-591e6ea1e3ec', '1', '7', '35', '28', '/37d46927-ba99-49aa-aecf-de1c3e44ea5b_template.docx', '2024-04-24 17:59:20', null, '2024-04-24 18:16:57', null, null);
 
 -- ----------------------------
 -- Table structure for sys_package
@@ -125,28 +128,19 @@ CREATE TABLE `sys_package` (
   `update_by` varchar(100) DEFAULT NULL COMMENT '修改者',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='分类表';
 
 -- ----------------------------
 -- Records of sys_package
 -- ----------------------------
-INSERT INTO `sys_package` VALUES ('31', '测试体检套餐', '222', '404,335,662,366,18445,1084,372,14345,1204,681,675,1', '28', '/355f4aae-f2a2-411d-9964-739ce58b1c2d_封面.png', '2024-04-19 14:01:45', null, '2024-04-19 14:12:28', null, '上传');
-
--- ----------------------------
--- Table structure for sys_promotion
--- ----------------------------
-DROP TABLE IF EXISTS `sys_promotion`;
-CREATE TABLE `sys_promotion` (
-  `id` int(11) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `create_time` varbinary(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of sys_promotion
--- ----------------------------
+INSERT INTO `sys_package` VALUES ('32', '职工A套餐', '120', '2066,366,1084,450,611,681,360,407,358,465,1543,404,335,2067,1,867,371,675', '31', '/306da36b-4967-49f2-9a80-9ddef2255962_封面.png', '2024-04-24 17:30:46', null, null, null, 'xx');
+INSERT INTO `sys_package` VALUES ('33', '职工B套餐', '222.33', '404,335,371,407,1084,366,1543,2067', '31', '/d185c2ec-974a-46ae-8cc0-ad5733ffb1c1_x.png', '2024-04-24 17:32:59', null, null, null, 'xx');
+INSERT INTO `sys_package` VALUES ('34', '职工C套餐', '567.00', '404,1543,1084,366,611,675,371', '31', '/bd5f46d0-ff29-4813-9ecc-dd79565a9c81_2x.png', '2024-04-24 17:33:35', null, null, null, null);
+INSERT INTO `sys_package` VALUES ('35', '婚A套餐', '123.00', '404,335,591,1903,450,14345,465,360,976,441,14286,358,341', '34', '/d1db2853-6f11-4e17-ac89-0138638285d1_3x.png', '2024-04-24 17:34:48', null, null, null, null);
+INSERT INTO `sys_package` VALUES ('36', '老人体检A', '1000', '404,662,1903,335,2066,366,1084,450,14345,465,360,675,1,867', '33', '/3b2b18db-effd-4b2a-aaf9-5f584cb7e269_老人.jpg', '2024-04-24 17:41:09', null, null, null, 'xx');
+INSERT INTO `sys_package` VALUES ('37', '老人体检B', '333.00', '404,1543,366,18445,611,1084,14345,675,681,360,372,976,14286,371,1204', '33', '/cd603df7-836f-4807-8283-ed8433c879f4_封面.png', '2024-04-24 17:42:36', null, null, null, null);
+INSERT INTO `sys_package` VALUES ('38', '职工E', '444', '404,450,14345,372,1,591,3,1903,662,2066,1084,681,976,360,358,1204', '31', '/b8a64808-d562-4508-ba5d-67a893495dbf_3x.png', '2024-04-24 17:43:14', null, null, null, 'x');
+INSERT INTO `sys_package` VALUES ('39', '专项A', '111', '404,804,663,450,372,1084,366,2067,3,1903,867,1,371,14286,360,976,407,441', '32', '/7b062f12-6621-4a2d-80e4-5dc2d65e59de_2x.png', '2024-04-24 17:49:21', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -185,13 +179,16 @@ CREATE TABLE `sys_subscribe` (
   `update_by` varchar(100) DEFAULT NULL COMMENT '修改者',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='预约表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='预约表';
 
 -- ----------------------------
 -- Records of sys_subscribe
 -- ----------------------------
-INSERT INTO `sys_subscribe` VALUES ('2', '13333333333', '好未来xxx号', '13111111111', '31', '测试体检套餐', '27', '小程序用户', '2', null, '2024-04-20 10:11:23', null, '2024-04-20 11:46:25', null, null);
-INSERT INTO `sys_subscribe` VALUES ('3', '13333333333', '好未来xxx号', '13111111111', '31', '测试体检套餐', '27', '小程序用户', '1', null, '2024-04-20 11:18:32', null, null, null, null);
+INSERT INTO `sys_subscribe` VALUES ('5', '13333333333', '好未来xxx号', '13111111111', '34', '职工C套餐', '27', '小程序用户', '1', null, '2024-04-24 17:52:24', null, null, null, null);
+INSERT INTO `sys_subscribe` VALUES ('6', '13333333333', '好未来xxx号', '13111111111', '33', '职工B套餐', '27', '小程序用户', '0', null, '2024-04-24 17:53:35', null, null, null, null);
+INSERT INTO `sys_subscribe` VALUES ('7', '14444444444', '好未来xxx号', '13111111111', '35', '婚A套餐', '28', '小程序用户', '1', null, '2024-04-24 17:59:00', null, null, null, null);
+INSERT INTO `sys_subscribe` VALUES ('8', '14444444444', '好未来xxx号', '13111111111', '36', '老人体检A', '28', '小程序用户', '2', null, '2024-04-24 18:00:15', null, '2024-04-24 18:00:25', null, null);
+INSERT INTO `sys_subscribe` VALUES ('9', '14444444444', '好未来xxx号', '13111111111', '32', '职工A套餐', '28', '大猫', '0', null, '2024-04-24 18:14:16', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -203,6 +200,7 @@ CREATE TABLE `sys_user` (
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '密码',
   `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '随机数',
+  `role_id` bigint(20) DEFAULT '1' COMMENT '角色ID',
   `status` char(1) CHARACTER SET utf8 DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '创建者',
@@ -210,10 +208,11 @@ CREATE TABLE `sys_user` (
   `update_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '修改者',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('26', '昵称', 'admin', '123456', null, '0', '2024-04-17 17:47:01', null, null, null, null);
-INSERT INTO `sys_user` VALUES ('27', '小程序用户', '13333333333', '123456', null, '0', '2024-04-17 17:51:21', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('26', '超级管理员', 'admin', '123456', null, '1', '0', '2024-04-17 17:47:01', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('27', '小程序用户', '13333333333', '123456', null, '2', '0', '2024-04-17 17:51:21', null, null, null, null);
+INSERT INTO `sys_user` VALUES ('28', '大猫', '14444444444', '123456', null, '2', '0', '2024-04-24 16:07:07', null, '2024-04-24 18:02:39', null, null);
