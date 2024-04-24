@@ -10,6 +10,7 @@
         <result property="nickName" column="nick_name"/>
         <result property="password" column="password"/>
         <result property="salt" column="salt"/>
+        <result property="roleId" column="role_id"/>
         <result property="status" column="status"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
@@ -19,7 +20,7 @@
     </resultMap>
 
     <sql id="selectSysUserVo">
-        select user_id, user_name, nick_name, password, salt, status, create_by, create_time, update_by, update_time, remark
+        select user_id, user_name, nick_name, password, salt, role_id, status, create_by, create_time, update_by, update_time, remark
         from sys_user
     </sql>
 
@@ -54,6 +55,7 @@
             <if test="nickName != null and nickName != ''">nick_name,</if>
             <if test="password != null">password,</if>
             <if test="salt != null">salt,</if>
+            <if test="roleId != null">role_id,</if>
             <if test="status != null">status,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -66,6 +68,7 @@
             <if test="nickName != null and nickName != ''">#{nickName},</if>
             <if test="password != null">#{password},</if>
             <if test="salt != null">#{salt},</if>
+            <if test="roleId != null">role_id,</if>
             <if test="status != null">#{status},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>

@@ -34,6 +34,9 @@ public class SysUser extends BaseEntity {
     @ApiModelProperty(value = "随机数")
     private String salt;
 
+    @ApiModelProperty(value = "角色")
+    private Long roleId;
+
     @ApiModelProperty(value = "帐号状态（0正常 1停用）")
     private String status;
 
@@ -41,6 +44,6 @@ public class SysUser extends BaseEntity {
      * 判断该用户是否为管理员
      */
     public boolean isAdmin() {
-        return userId != null && userId == 1L;
+        return userId != null && roleId == 1;
     }
 }

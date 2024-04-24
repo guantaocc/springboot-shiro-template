@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.rain.shiro.commons.core.result.Result;
 import com.rain.shiro.project.entity.SysCategory;
+import com.rain.shiro.project.entity.SysPackage;
+import com.rain.shiro.project.service.ISysPackageService;
 import com.rain.shiro.project.service.SysCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -22,6 +24,9 @@ public class SysCategoryController extends BaseController {
 
     @Autowired
     private SysCategoryService SysCategoryService;
+
+    @Autowired
+    private ISysPackageService SysPackageService;
 
     @ApiOperation(value = "查询分类列表")
     @ApiImplicitParams({
@@ -68,6 +73,16 @@ public class SysCategoryController extends BaseController {
     @ApiOperation(value = "批量删除分类")
     @DeleteMapping("/batchDelete/{ids}")
     public Result batchDelete(@PathVariable Long[] ids) {
+        Boolean hasPackage = false;
+        for (long id : ids){
+            SysPackage syspackage = SysPackageService.selectSysPackageById(id);
+            if(syspackage != null){
+                hasPackage = true;
+            }
+        }
+        if(hasPackage){
+            return Result.error(500, "套餐中关联相关分类，请先删除相关套餐");
+        }
         return isSuccess(SysCategoryService.deleteByIds(ids));
     }
 }

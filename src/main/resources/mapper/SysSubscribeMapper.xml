@@ -29,7 +29,7 @@
     <select id="selectSysSubscribeList" parameterType="SysSubscribe" resultMap="SysSubscribeResult">
         <include refid="selectSysSubscribeVo"/>
         <where>
-            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="phone != null  and phone != ''"> and phone like concat('%', #{phone }, '%')</if>
             <if test="address != null  and address != ''"> and address = #{address}</if>
             <if test="institutionPhone != null  and institutionPhone != ''"> and institution_phone = #{institutionPhone}</if>
             <if test="packageId != null  and packageId != ''"> and package_id = #{packageId}</if>
