@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rain.shiro.project.mapper.StatisticsMapper">
+
+    <select id="getStatistics" resultType="java.util.Map">
+        SELECT
+            a.time,
+            COALESCE(app_count, 0) AS popularityNumber,
+            COALESCE(ord_count, 0) AS playNumber
+        FROM (
+                 SELECT
+                     DATE_FORMAT(create_time, '%Y-%m-%d') AS time,
+                COUNT(*) AS app_count
+                 FROM
+                     `sys_subscribe`
+                 GROUP BY
+                     DATE_FORMAT(create_time, '%Y-%m-%d')
+             ) a
+                 LEFT JOIN (
+            SELECT
+                DATE_FORMAT(create_time, '%Y-%m-%d') AS time,
+                COUNT(*) AS ord_count
+            FROM
+                `sys_order`
+            GROUP BY
+                DATE_FORMAT(create_time, '%Y-%m-%d')
+        ) o ON a.time = o.time
+        ORDER BY
+            a.time;
+    </select>
+
+</mapper>

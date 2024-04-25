@@ -84,6 +84,7 @@
             <if test="userName != null and userName != ''">user_name = #{userName},</if>
             <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
             <if test="password != null">password = #{password},</if>
+            <if test="roleId != null">role_id,</if>
             <if test="status != null">status = #{status},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

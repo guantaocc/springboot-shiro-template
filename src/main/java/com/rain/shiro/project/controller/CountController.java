@@ -3,6 +3,7 @@ package com.rain.shiro.project.controller;
 import com.rain.shiro.commons.core.result.Result;
 import com.rain.shiro.project.service.ISysOrderService;
 import com.rain.shiro.project.service.ISysSubscribeService;
+import com.rain.shiro.project.service.StatisticsService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,10 @@ public class CountController {
 
     @Autowired
     ISysSubscribeService sysSubscribeService;
+
+    @Autowired
+    StatisticsService statisticsService;
+
     @GetMapping("/home")
     public Result dashboard() {
         HashMap<String, Integer> map = new HashMap<>();
@@ -35,5 +40,10 @@ public class CountController {
         map.put("subscribeTodayNow", subscribeTodayNow);
         map.put("subscribeAll", subscribeAll);
         return success(map);
+    }
+
+    @GetMapping("/overview")
+    public Result overview() {
+        return success(statisticsService.getStatistics());
     }
 }
