@@ -128,7 +128,7 @@ CREATE TABLE `sys_package` (
   `update_by` varchar(100) DEFAULT NULL COMMENT '修改者',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='套餐表';
 
 -- ----------------------------
 -- Records of sys_package
