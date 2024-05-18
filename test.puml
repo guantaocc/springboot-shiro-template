@@ -1,0 +1,37 @@
+@startuml
+
+class User {
+    - username: String
+    - password: String
+    - contactInfo: String
+    + login(): void
+    + logout(): void
+    + viewProfile(): void
+}
+
+class Device {
+    - deviceID: String
+    - deviceType: String
+    - location: String
+    + controlDevice(): void
+    + getDeviceStatus(): String
+}
+
+class Service {
+    - serviceType: String
+    - serviceStatus: String
+    + requestService(): void
+    + viewServiceRecords(): void
+}
+
+class Management {
+    + manageUser(user: User): void
+    + manageDevice(device: Device): void
+    + manageService(service: Service): void
+}
+
+User "*" -- "1" Management : uses
+Device "*" -- "1" Management : manages
+Service "*" -- "1" Management : provides
+
+@enduml
